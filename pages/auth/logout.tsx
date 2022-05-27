@@ -1,20 +1,20 @@
-import { GetServerSideProps, NextPage } from 'next';
-import cookie from 'cookie';
+import { GetServerSideProps, NextPage } from "next";
+import cookie from "cookie";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const authCookie = cookie.serialize('auth', '', {
+  const authCookie = cookie.serialize("token", "", {
     maxAge: -1,
     httpOnly: true,
-    path: '/',
-    sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production',
+    path: "/",
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
   });
 
-  ctx.res.setHeader('Set-Cookie', authCookie);
+  ctx.res.setHeader("Set-Cookie", authCookie);
 
   return {
     redirect: {
-      destination: '/',
+      destination: "/",
       permanent: false,
     },
   };
